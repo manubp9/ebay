@@ -47,8 +47,7 @@ public class Auction
     /**
      * Make a bid for a lot.
      * A message is printed indicating whether the bid is
-     * successful or not.
-     * 
+     * successful or not
      * @param lotNumber The lot being bid for.
      * @param bidder The person bidding for the lot.
      * @param value  The value of the bid.
@@ -74,40 +73,53 @@ public class Auction
     }
 
     /**
-     * Partiendo del código terminado de la actividad 0059,
-     * añade un método denominado close a la clase Auction. 
-     * Este método debe mostrar por pantalla los detalles de todos los items 
-     * que se estén subastando actualmente. 
-     * De aquellos por los que haya habido pujas se debe indicar el nombre 
-     * de la persona que ha hecho la puja más alta y el valor de dicha puja; 
-     * del resto debe indicar que no ha habido pujas.
-
-     * Testea los cambios y haz un commit.
-
-     * Sube el proyecto a GitHub e indica la URL de este commit.
+     * imprime por pantalla los objetos subastados y muestra si tiene pujas o no, la cantidad y la persona 
      */
     public void close()
     {
-        int cont = 0;
+        int cont = 0;//
         while(cont < lots.size())
         {
             if (lots.get(cont).getHighestBid() !=null)
             {
                 System.out.println("Nombre del pujador " +
-                lots.get(cont).getHighestBid().getBidder().getName()+
-                " cantidad =" + lots.get(cont).getHighestBid().getValue()+
-                "detalles =" + lots.get(cont).getDescription());
+                    lots.get(cont).getHighestBid().getBidder().getName()+
+                    " cantidad = " + lots.get(cont).getHighestBid().getValue()+
+                    "detalles = " + lots.get(cont).getDescription());
             }
             else
             {
                 System.out.println("Este objeto ("+lots.get(cont).getDescription()+")"+
-                "no tiene niguna puja");
+                    "no tiene niguna puja");
             }
             cont = cont +1;
         }
 
+    }
+
+    /**
+     * Partiendo del código terminado de la actividad 0060, 
+     * añade un método denominado getUnsold a la clase Auction que devuelva una colección
+     * de todos los items por los que no habido ninguna puja en este momento; 
+     * este método no debe imprimir nada por pantalla.
+     * Testea los cambios y haz un co
+     */
+    public ArrayList getUnsold()
+    {
+        ArrayList<Lot> unsold = new ArrayList<Lot>();
+        int indice = 0;
+        while (indice< lots.size())
+        {
+            if (lots.get(indice).getHighestBid() == null)
+            {
+                unsold.add(lots.get(indice));
+
+            }
+            indice = indice + 1 ;
+
         }
-    
+        return unsold;
+    }
 
     /**
      * Return the lot with the given number. Return null
