@@ -43,7 +43,7 @@ public class Auction
             System.out.println(lot.toString());
         }
     }
-    
+
     /**
      * Make a bid for a lot.
      * A message is printed indicating whether the bid is
@@ -57,21 +57,57 @@ public class Auction
     {
         Lot selectedLot = getLot(lotNumber);
         if(selectedLot != null) {
-            
+
             boolean successful = selectedLot.bidFor(new Bid(bidder,value));
             if(successful) {
                 System.out.println("The bid for lot number " +
-                                   lotNumber + " was successful.");
+                    lotNumber + " was successful.");
             }
             else {
                 // Report which bid is higher.
-               
+
                 System.out.println("Lot number: " + lotNumber +
-                                   " already has a bid of: " +
-                                  selectedLot.getHighestBid().getValue());
+                    " already has a bid of: " +
+                    selectedLot.getHighestBid().getValue());
             }
         }
     }
+
+    /**
+     * Partiendo del código terminado de la actividad 0059,
+     * añade un método denominado close a la clase Auction. 
+     * Este método debe mostrar por pantalla los detalles de todos los items 
+     * que se estén subastando actualmente. 
+     * De aquellos por los que haya habido pujas se debe indicar el nombre 
+     * de la persona que ha hecho la puja más alta y el valor de dicha puja; 
+     * del resto debe indicar que no ha habido pujas.
+
+     * Testea los cambios y haz un commit.
+
+     * Sube el proyecto a GitHub e indica la URL de este commit.
+     */
+    public void close()
+    {
+        int cont = 0;
+        while(cont < lots.size())
+        {
+            if (lots.get(cont).getHighestBid() !=null)
+            {
+                System.out.println("Nombre del pujador " +
+                lots.get(cont).getHighestBid().getBidder().getName()+
+                " cantidad =" + lots.get(cont).getHighestBid().getValue()+
+                "detalles =" + lots.get(cont).getDescription());
+            }
+            else
+            {
+                System.out.println("Este objeto ("+lots.get(cont).getDescription()+")"+
+                "no tiene niguna puja");
+            }
+            cont = cont +1;
+        }
+
+        }
+    
 
     /**
      * Return the lot with the given number. Return null
@@ -87,9 +123,9 @@ public class Auction
             // right lot.
             if(selectedLot.getNumber() != lotNumber) {
                 System.out.println("Internal error: Lot number " +
-                                   selectedLot.getNumber() +
-                                   " was returned instead of " +
-                                   lotNumber);
+                    selectedLot.getNumber() +
+                    " was returned instead of " +
+                    lotNumber);
                 // Don't return an invalid lot.
                 selectedLot = null;
             }
@@ -97,7 +133,7 @@ public class Auction
         }
         else {
             System.out.println("Lot number: " + lotNumber +
-                               " does not exist.");
+                " does not exist.");
             return null;
         }
     }
